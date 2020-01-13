@@ -1,0 +1,14 @@
+
+@font-face {
+   font-family: 'FontAwesome';
+   src: url('fontawesome-webfont.ttf');
+}
+
+.tool-bar{
+    -fx-background-color: linear-gradient(#999,#777);
+}
+
+.text-area{
+    -fx-width: auto;
+    -fx-height: auto;
+}

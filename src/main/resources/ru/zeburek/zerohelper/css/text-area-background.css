@@ -1,0 +1,13 @@
+.styled-text-area {
+    text-area-background: black ;
+    text-area-foreground: white ;
+    -fx-fill: text-area-foreground;
+}
+
+.styled-text-area .content {
+    -fx-background-color: text-area-background ;
+}
+
+.styled-text-area .text {
+    -fx-fill: text-area-foreground;
+}

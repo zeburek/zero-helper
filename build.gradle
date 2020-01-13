@@ -1,0 +1,63 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+    id 'org.beryx.jlink' version '2.12.0'
+}
+
+group 'ru.zerotime'
+version '4.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2'
+    implementation 'org.apache.httpcomponents:httpcomponents-core:4.4.13'
+    implementation 'org.apache.httpcomponents:httpcomponents-client:4.5.10'
+    implementation 'org.apache.logging.log4j:log4j:2.13.0'
+    implementation 'org.slf4j:jcl-over-slf4j:1.7.30'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'org.netbeans.external:org-apache-commons-lang:RELEASE112'
+    implementation 'org.netbeans.external:org-apache-commons-codec:RELEASE112'
+    implementation 'net.java.dev.jna:jna-platform:5.5.0'
+    implementation 'com.brsanthu:google-analytics-java:2.0.0'
+    implementation 'de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.4'
+}
+
+def versionPropsFile = file('$buildDir/../src/main/resources/ru/zeburek/zerohelper/version.properties')
+
+if (versionPropsFile.canRead()) {
+    System.out.println("Version file: ${versionPropsFile}")
+    Properties versionProps = new Properties()
+
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    def major = versionProps['VERSION_MAJOR'].toInteger()
+    def minor = versionProps['VERSION_MINOR'].toInteger()
+    def code = versionProps['VERSION_PATCH'].toInteger() + 1
+
+    versionProps['VERSION_PATCH']=code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+
+    def newVer = major + "." + minor + "." + code
+    System.out.println("New version: ${newVer}")
+    project.setVersion(newVer)
+} else {
+    throw new GradleException("Could not read version.properties!")
+}
+
+javafx {
+    version = "13"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.web' ]
+}
+
+jlink {
+    launcher {
+        name = 'hellofx'
+    }
+}
+
+mainClassName = "ru.zeburek.zerohelper.ZeroHelper"

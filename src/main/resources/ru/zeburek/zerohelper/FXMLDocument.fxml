@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.input.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.web.*?>
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>-->
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.zeburek.zerohelper.controllers.FXMLDocumentController">
+   <top>
+      <ToolBar fx:id="topControlsToolbar" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <items>
+            <MenuButton fx:id="menuBarMenuButton" mnemonicParsing="false">
+              <items>
+                <MenuItem fx:id="saveOutputMainMenuItem" mnemonicParsing="false" onAction="#handleSaveOutputMainMenuItem" text="Save output...">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="reloadListsMainMenuItem" mnemonicParsing="false" onAction="#handleReloadListsMainMenuItem" text="Reload lists">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="appInstallMainMenuItem" mnemonicParsing="false" onAction="#handleAppInstallMainMenuItem" text="Install App">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem fx:id="takeScreenshotMainMenuItem" mnemonicParsing="false" onAction="#handleTakeScreenshotMainMenuItem" text="Take a screenshot">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                <MenuItem fx:id="aboutInfoMainMenuItem" mnemonicParsing="false" onAction="#handleAboutInfoMainMenuItem" text="About" />
+              </items>
+            </MenuButton>
+            <Button fx:id="tabsAddTubButton" mnemonicParsing="false" onAction="#handleTabsAddTubButton" text="+" textAlignment="CENTER" wrapText="true" />
+            <ComboBox fx:id="deviceIdComboBox" onAction="#handleDeviceIdComboBoxPropertyChanged" prefWidth="150.0" promptText="Select device id" />
+            <ComboBox fx:id="packageNameComboBox" onAction="#handlePackageNameComboBoxPropertyChanged" prefWidth="150.0" promptText="Select package name" />
+            <Button fx:id="reloadListsButton" mnemonicParsing="false" onAction="#handleReloadListsButton" text="Reload" />
+            <SplitMenuButton fx:id="logcatStartMenuItem" mnemonicParsing="false" onAction="#handleLogcatStartSplitButton" text="Logcat">
+              <items>
+                <MenuItem fx:id="logcatStopMenuItem" mnemonicParsing="false" onAction="#handleLogcatStopMenuItem" text="Stop">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                <MenuItem fx:id="logcatClearMenuItem" mnemonicParsing="false" onAction="#handleLogcatClearMenuItem" text="Clear" />
+              </items>
+            </SplitMenuButton>
+            <SplitMenuButton fx:id="devicesListSplitButton" mnemonicParsing="false" onAction="#handleDevicesListSplitButton" text="Devices">
+              <items>
+                <MenuItem fx:id="devicesUnAuthMenuItem" mnemonicParsing="false" onAction="#handleDevicesUnAuthMenuItem" text="UnAuth" />
+              </items>
+            </SplitMenuButton>
+            <SplitMenuButton fx:id="appInstallSplitButton" mnemonicParsing="false" onAction="#handleAppInstallSplitButton" text="Intall App">
+              <items>
+                <MenuItem fx:id="appClearMenuItem" mnemonicParsing="false" onAction="#handleAppClearMenuItem" text="Clear app data" />
+                <MenuItem fx:id="appUninstallMenuItem" mnemonicParsing="false" onAction="#handleAppUninstallMenuItem" text="Uninstall app" />
+                <MenuItem fx:id="appStopMenuItem" mnemonicParsing="false" onAction="#handleAppStopMenuItem" text="Force-stop app" />
+                <MenuItem fx:id="appVersionMenuItem" mnemonicParsing="false" onAction="#handleAppVersionMenuItem" text="App version" />
+                  <CheckMenuItem fx:id="rApkInstallCheckbox" mnemonicParsing="false" selected="true" text="Save data on update" />
+                  <CheckMenuItem fx:id="dApkInstallCheckbox" mnemonicParsing="false" text="Enable downgrade" />
+              </items>
+            </SplitMenuButton>
+            <SplitMenuButton fx:id="screenVideoRecordSplitButton" mnemonicParsing="false" onAction="#handleScreenVideoRecordSplitButton" text="Record Screen">
+              <items>
+                <MenuItem fx:id="screenTakeScreenshotMenuItem" mnemonicParsing="false" onAction="#handleScreenTakeScreenshotMenuItem" text="Take a Screenshot" />
+              </items>
+            </SplitMenuButton>
+            <TextField fx:id="filterTextField" onAction="#handleLogcatFilteredTextField" promptText="Filter..." />
+            <TextField fx:id="searchTextField" onAction="#handleSearchTextField" promptText="Search..." />
+            <CheckBox fx:id="outputClearCheckBox" mnemonicParsing="false" selected="true" text="Clear Out" textFill="WHITE" />
+         </items>
+      </ToolBar>
+   </top>
+   <center>
+      <TabPane fx:id="outputTabbedPane" prefHeight="200.0" prefWidth="200.0" rotateGraphic="true" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
+        <tabs>
+          <!--
+          <Tab closable="false" text="Log Tab 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <JTextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: black; -fx-fill: white;" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          -->
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <ToolBar fx:id="bottomControlsToolbar" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(#ddd,#ccc);" BorderPane.alignment="CENTER">
+         <items>
+            <ProgressBar fx:id="progressBar" prefHeight="10.0" prefWidth="100.0" progress="0.0" />
+            <ProgressIndicator fx:id="progressSpinner" prefHeight="10.0" prefWidth="10.0" visible="false" />
+            <Label fx:id="progressActivityLabel" prefHeight="10.0" prefWidth="200.0" />
+            <Separator orientation="VERTICAL" />
+            <Label fx:id="selectedAppLabel" onMouseClicked="#handleAppLableDoubleClick" prefHeight="10.0">
+               <tooltip>
+                  <Tooltip text="Double click to copy package name" />
+               </tooltip></Label>
+            <Separator orientation="VERTICAL" />
+            <Label fx:id="selectedDeviceLabel" onMouseClicked="#handleDeviceLableDoubleClick" prefHeight="10.0">
+               <tooltip>
+                  <Tooltip text="Double click to copy device serial" />
+               </tooltip></Label>
+            <Separator orientation="VERTICAL" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button id="additionalPanelCommandButton" fx:id="additionalPanelCommandButton" mnemonicParsing="false" onAction="#handleAdditionalPanelCommandButton" prefHeight="10.0" text="&gt;" textAlignment="CENTER" />
+         </items>
+      </ToolBar>
+   </bottom>
+   <left>
+      <TabPane fx:id="borderTabPane" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab closable="false" text="Customize output">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" layoutX="72.0" layoutY="14.0" text="Font family" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <ComboBox fx:id="customizeFontFamilyComboBox" layoutX="11.0" layoutY="31.0" prefWidth="150.0" promptText="Select font family" />
+                        <Label alignment="CENTER" layoutX="72.0" layoutY="56.0" text="Text size" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <ComboBox fx:id="customizeTextSizeComboBox" layoutX="11.0" layoutY="73.0" prefWidth="150.0" promptText="Select text size" />
+                        <Label alignment="CENTER" layoutX="72.0" layoutY="98.0" text="Text color" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <ColorPicker fx:id="customizeTextColorPicker" layoutX="46.0" layoutY="115.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="140.0" text="Output color" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <ColorPicker fx:id="customizeOutputColorPicker" layoutX="45.0" layoutY="157.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                        <Button fx:id="customizeResetToDefaultButton" layoutX="64.0" layoutY="192.0" mnemonicParsing="false" text="Reset" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets></Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab closable="false" disable="true" text="Device screen">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab disable="true" text="Intents">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </left>
+</BorderPane>
