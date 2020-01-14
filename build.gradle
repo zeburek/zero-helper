@@ -4,7 +4,7 @@ plugins {
     id 'org.beryx.jlink' version '2.12.0'
 }
 
-group 'ru.zerotime'
+group 'ru.zeburek'
 version '4.0'
 
 repositories {
@@ -12,19 +12,19 @@ repositories {
 }
 
 dependencies {
-    implementation 'ch.qos.logback:logback-classic:1.2.3'
-    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
+    implementation 'ch.qos.logback:logback-core:1.3.0-alpha5'
     implementation 'de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2'
     implementation 'org.apache.httpcomponents:httpcomponents-core:4.4.13'
     implementation 'org.apache.httpcomponents:httpcomponents-client:4.5.10'
     implementation 'org.apache.logging.log4j:log4j:2.13.0'
+    implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
     implementation 'org.slf4j:jcl-over-slf4j:1.7.30'
-    implementation 'org.slf4j:slf4j-api:1.7.30'
     implementation 'org.netbeans.external:org-apache-commons-lang:RELEASE112'
-    implementation 'org.netbeans.external:org-apache-commons-codec:RELEASE112'
     implementation 'net.java.dev.jna:jna-platform:5.5.0'
     implementation 'com.brsanthu:google-analytics-java:2.0.0'
     implementation 'de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.4'
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
 def versionPropsFile = file('$buildDir/../src/main/resources/ru/zeburek/zerohelper/version.properties')
@@ -56,7 +56,11 @@ javafx {
 
 jlink {
     launcher {
-        name = 'hellofx'
+        name = 'zerohelper'
+    }
+    mergedModule {
+        requires 'org.slf4j'
+        requires 'java.logging'
     }
 }
 
