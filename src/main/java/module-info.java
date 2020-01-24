@@ -6,8 +6,7 @@ module ru.zeburek.zerohelper {
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.swing;
-    requires google.analytics.java;
-    requires commons.codec;
+    requires org.apache.commons.lang.RELEASE112;
     requires org.slf4j;
     requires ch.qos.logback.classic;
     opens ru.zeburek.zerohelper to javafx.graphics;

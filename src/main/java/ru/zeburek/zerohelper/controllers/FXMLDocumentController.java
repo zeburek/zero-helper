@@ -184,15 +184,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     public void handleOnWindowShown(HostServices hostServices, Stage stage, Application.Parameters parameters){
-//        try {
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-//        } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
-//            try {
-//                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            } catch (Exception e1) {
-//                e1.printStackTrace();
-//            }
-//        }
         startAdbServer();
         mainHostServices = hostServices;
         mainStage = stage;
@@ -203,7 +194,7 @@ public class FXMLDocumentController implements Initializable {
         tabsAddTubButton.fire();
         getSelectedTabInTabPane().setClosable(false);
 
-        if (!parameters.getRaw().isEmpty()){
+        if (!parameters.getRaw().isEmpty() && parameters.getRaw().get(0).endsWith(".apk")){
             LoggingAdapter.debug("Parameters",parameters.getRaw().get(0));
             reloadListsButton.fire();
             new Thread(() -> {

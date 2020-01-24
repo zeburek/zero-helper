@@ -23,8 +23,6 @@ dependencies {
     implementation 'org.slf4j:jcl-over-slf4j:1.7.30'
     implementation 'org.netbeans.external:org-apache-commons-lang:RELEASE112'
     implementation 'net.java.dev.jna:jna-platform:5.5.0'
-    implementation 'com.brsanthu:google-analytics-java:2.0.0'
-    implementation 'de.huxhorn.lilith:de.huxhorn.lilith.3rdparty.junique:1.0.4'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
@@ -50,7 +48,7 @@ if (versionPropsFile.canRead()) {
     throw new GradleException("Could not read version.properties!")
 }
 
-mainClassName = "ru.zeburek.zerohelper.ZeroHelper"
+mainClassName = "ru.zeburek.zerohelper/ru.zeburek.zerohelper.ZeroHelper"
 
 javafx {
     version = "13"
