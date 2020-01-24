@@ -40,15 +40,13 @@ public class ZeroHelper extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(ZeroHelper.class.getResource("FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
         Parent root = loader.load();
         FXMLDocumentController controller = loader.<FXMLDocumentController>getController();
 
-        Scene scene = new Scene(root);
-
-        stage.getIcons().add(new Image(ZeroHelper.class.getResourceAsStream("Logo_ZH.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("Logo_ZH.png")));
         stage.setTitle("Zero Helper");
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.addEventHandler(WindowEvent.WINDOW_SHOWN, event -> {
             controller.handleOnWindowShown(getHostServices(), stage, getParameters());
         });

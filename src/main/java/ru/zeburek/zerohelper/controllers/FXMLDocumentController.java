@@ -190,7 +190,6 @@ public class FXMLDocumentController implements Initializable {
         thsp.loadSettings();
         thrp.setAllStyledTextAreaMaps(getCurrentTabTextArea());
         thbpc = new BorderPaneController(borderTabPane,additionalPanelCommandButton);
-        setSomeConfig();
         tabsAddTubButton.fire();
         getSelectedTabInTabPane().setClosable(false);
 
@@ -595,11 +594,6 @@ public class FXMLDocumentController implements Initializable {
 
     public String getVideoFileName(){
         return "UnNamedVideoFile_"+System.currentTimeMillis();
-    }
-
-
-    private void setSomeConfig() {
-
     }
 
     public void startAdbServer(){
